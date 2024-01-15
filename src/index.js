@@ -14,31 +14,6 @@ mongoose.connect('mongodb+srv://christianjavierbergero:kPX5vgj9ewJ7sN59@cluster0
     .then(async () => {
 
         console.log('BDD conectada');
-      
-        /*
-        await productModel.create([
-            {title: "Arroz", "description": "Arroz Fino", "price": 450, "stock": 1050, "category": "Alimentos", "code": "AA100", "thumbnails": "Sin"},
-            {title: "Fideos", "description": "Fideos sin TAC", "price": 850, "stock": 2031, "category": "Alimentos", "code": "FF100", "thumbnails": "Sin"},
-            {title: "Yogourt", "description": "Descremado", "price": 750, "stock": 230, "category": "Lácteos", "code": "YY100", "thumbnails": "Sin"},
-            {title: "Mayonesa", "description": "Light", "price": 956, "stock": 624, "category": "Aderezos", "code": "MM300", "thumbnails": "Sin"},
-            {title: "Salsa Golf", "description": "Clásica", "price": 487, "stock": 596, "category": "Aderezos", "code": "SG200", "thumbnails": "Sin"},
-            {title: "Mostasa", "description": "Clásica", "price": 450, "stock": 1050, "category": "Aderezos", "code": "MZ100", "thumbnails": "Sin"},
-            {title: "Azúcar", "description": "Refinada", "price": 154, "stock": 639, "category": "Otros", "code": "AZ854", "thumbnails": "Sin"},
-            {title: "Sal", "description": "Sal Marina", "price": 896, "stock": 78, "category": "Otros", "code": "SS541", "thumbnails": "Sin"},
-            {title: "Aceite", "description": "Aceite Oliva", "price": 969, "stock": 896, "category": "Cocina", "code": "AC485", "thumbnails": "Sin"},
-            {title: "Vinagre", "description": "Manzana", "price": 563, "stock": 417, "category": "Cocina", "code": "VM155", "thumbnails": "Sin"},
-            {title: "Vinagre", "description": "Alcohol", "price": 590, "stock": 633, "category": "Cocina", "code": "VA744", "thumbnails": "Sin"},
-            {title: "Galletas", "description": "Dulces", "price": 250, "stock": 362, "category": "Alimentos", "code": "GG123", "thumbnails": "Sin"},
-            {title: "Coca Cola", "description": "Light", "price": 958, "stock": 1454, "category": "Bebidas", "code": "CC111", "thumbnails": "Sin"},
-            {title: "Pepsi", "description": "Light", "price": 1000, "stock": 325, "category": "Bebidas", "code": "PP110", "thumbnails": "Sin"},
-            {title: "Pritty", "description": "Limón", "price": 450, "stock": 1050, "category": "Bebidas", "code": "PY555", "thumbnails": "Sin"},
-            {title: "Fernet", "description": "Fernet Branca", "price": 450, "stock": 1050, "category": "Bebidas Alcohólicas", "code": "BR111", "thumbnails": "Sin"},
-            {title: "Lecha", "description": "Descremada", "price": 142, "stock": 1050, "category": "Lácteos", "code": "LC152", "thumbnails": "Sin"},
-            {title: "Arroz", "description": "Arroz Fino", "price": 450, "stock": 1050, "category": "Alimentos", "code": "AA100", "thumbnails": "Sin"}
-        ]);
-        */
-
-
 
     } )
     .catch((error) => console.log(`Error de conexión: ${error}`))
