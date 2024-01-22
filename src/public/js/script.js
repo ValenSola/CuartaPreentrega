@@ -1,11 +1,5 @@
 
-const socket = io(); //lO PUEDO INSTANCIAR POR QUE PREVIAMENTE POR CDN LO ESTABLECÍ EN MAIN.HANDLEBARSA
-
-//PAra poder establecer conexión el cliente primero debe enviar mensaje al servidor socket.io
-//Se hace de la siguiente manera:
-
-
-
+const socket = io(); 
 const btnAgregar = document.getElementById("btnAgregar")
 const btnEliminar = document.getElementById("btnEliminar")
 
@@ -20,15 +14,15 @@ btnAgregar.addEventListener('click', () => {
 });
 
 socket.on('mostrarProducto', (mensaje)=>{
-        /*Swal.fire({
+        Swal.fire({
             position: 'top-end',
             icon: 'success',
             title: `${mensaje}`,
             showConfirmButton: false,
             timer: 1500
           })
-          */
-          //window.alert(`${mensaje}`);
+          
+          window.alert(`${mensaje}`);
 
     
 })
@@ -38,7 +32,6 @@ btnEliminar.addEventListener('click', () => {
     
     const codeInput = document.getElementById('code').value
 
-    //console.log(`Entra por acá en eliminar: ${codeInput}`)
     socket.emit('eliminarProducto', codeInput);
     
   
@@ -53,8 +46,26 @@ socket.on("mostrarEliminado",   (mensaje)=>{
         icon: 'success',
         title: `${mensaje}`,
         showConfirmButton: false,
-        timer: 3000 // Aumentar a 3000 milisegundos (3 segundos) o más
+        timer: 3000 
     });
 
     
 })
+
+window.addEventListener('DOMContentLoaded', event => {
+
+ 
+    const sidebarToggle = document.body.querySelector('#sidebarToggle');
+    if (sidebarToggle) {
+       if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+            document.body.classList.toggle('sb-sidenav-toggled');
+        }
+
+        sidebarToggle.addEventListener('click', event => {
+            event.preventDefault();
+            document.body.classList.toggle('sb-sidenav-toggled');
+            localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+        });
+    }
+
+});
