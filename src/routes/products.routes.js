@@ -3,32 +3,32 @@ import { productModel } from "../models/products.models.js";
 
 const productRouter = Router()
 
-productRouter.get('/', async (req, res) => {
-    //Limiti
+productRouter.get('/api/products', async (req, res) => {
+    
     const { limit } = req.query;
     const limitProd = limit ?? 10;
 
-    //Page
-    const {page} = req.query; // Número de página que deseas obtener
+    
+    const {page} = req.query; 
     const pageProd = page ?? 1; 
 
-    //query
+   
     const {query} = req.query
     const {atributeFilter} = req.query
 
-    // Crea un objeto de filtro dinámico
+   
     const filter = {};
 
-    // Verifica si se proporcionó un atributo y un valor de atributo
+   
     if (query && atributeFilter) {
         filter[atributeFilter] = query;
     }
     
-    //sort
+    
     const sort = req.query.sort;
     let sortProd = null;
     
-    // Intenta convertir sort en un número
+    
     const sortAsNumber = parseInt(sort);
     
     if (!isNaN(sortAsNumber) && (sortAsNumber === 1 || sortAsNumber === -1)) {
@@ -37,10 +37,10 @@ productRouter.get('/', async (req, res) => {
   
     
 
-    //const resultado = await productModel.paginate({}, { page, limit: perPage })
+   
     
     try {
-        //const prods = await productModel.find().limit(limitProd)
+        
         const resultado = await productModel.paginate(filter, {limit: limitProd, sort: { price: sortProd}, page: pageProd})
         res.status(200).send({ respuesta: 'OK', mensaje: resultado })
     } catch (error) {
@@ -48,7 +48,7 @@ productRouter.get('/', async (req, res) => {
     }
 })
 
-productRouter.get('/:id', async (req, res) => {
+productRouter.get('/api/products/:pid', async (req, res) => {
     const { id } = req.params
 
     try {
@@ -62,7 +62,7 @@ productRouter.get('/:id', async (req, res) => {
     }
 })
 
-productRouter.post('/', async (req, res) => {
+productRouter.post('/api/products', async (req, res) => {
     const { title, description, stock, code, price, category } = req.body
     try {
         const prod = await productModel.create({ title, description, stock, code, price, category })
@@ -72,7 +72,7 @@ productRouter.post('/', async (req, res) => {
     }
 })
 
-productRouter.put('/:id', async (req, res) => {
+productRouter.put('/api/products/:pid', async (req, res) => {
     const { id } = req.params
     const { title, description, stock, status, code, price, category } = req.body
 
@@ -87,7 +87,7 @@ productRouter.put('/:id', async (req, res) => {
     }
 })
 
-productRouter.delete('/:id', async (req, res) => {
+productRouter.delete('/api/products/:pid', async (req, res) => {
     const { id } = req.params
 
     try {

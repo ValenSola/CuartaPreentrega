@@ -67,10 +67,10 @@ class ManagerProducts{
 
    validateProduct(product) {
         if (!product.title || !product.description || !product.code || !product.price || !product.status || !product.stock || !product.category) {
-            return false; // Alguno de los campos obligatorios está ausente o vacío.
+            return false; 
         }
 
-        return true; // Todos los campos obligatorios están presentes y no están vacíos.
+        return true;
     }
 
     async writeFileProducts(products){
@@ -85,10 +85,10 @@ class ManagerProducts{
 
     async addProduct(prod){
         try {
-             //Se busca el id mayor y se agrega a prod
+             
             prod.id = await this.getMayId() + 1;
 
-            //Si no se pasa como parámetro thumbnail se le asigna "sin info"
+           
             if(!prod.thumbnail){
                 prod.thumbnail = "sin info"
             }
@@ -116,7 +116,7 @@ class ManagerProducts{
                 
             });
             if(seActualiza){
-                await this.writeFileProducts(updatedProducts) // Corrección aquí
+                await this.writeFileProducts(updatedProducts)
             }
 
         } catch (error) {

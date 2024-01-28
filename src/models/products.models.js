@@ -34,6 +34,6 @@ const productSchema = new Schema({
     thumbnails: []
 })
 
-productSchema.plugin(paginate) //Implementar el metodo paginate en el schema
+productSchema.plugin(paginate) 
 
 export const productModel = model('products', productSchema)

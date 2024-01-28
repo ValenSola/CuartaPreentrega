@@ -4,7 +4,7 @@ import { productModel } from "../models/products.models.js";
 
 const cartRouter = Router()
 
-cartRouter.get('/:id', async (req, res) => {
+cartRouter.get('/api/carts/:cid', async (req, res) => {
     const { id } = req.params
 
     try {
@@ -18,7 +18,7 @@ cartRouter.get('/:id', async (req, res) => {
     }
 })
 
-cartRouter.post('/', async (req, res) => {
+cartRouter.post('/api/carts', async (req, res) => {
 
     try {
         const cart = await cartModel.create({})
@@ -28,23 +28,23 @@ cartRouter.post('/', async (req, res) => {
     }
 })
 
-cartRouter.post('/:cid/products/:pid', async (req, res) => {
+cartRouter.post('/api/carts/:cid/products/:pid', async (req, res) => {
     const { cid, pid } = req.params
     const { quantity } = req.body
 
     try {
         const cart = await cartModel.findById(cid)
         if (cart) {
-            const prod = await productModel.findById(pid) //Busco si existe en LA BDD, no en el carrito
+            const prod = await productModel.findById(pid) 
 
             if (prod) {
-                const indice = cart.products.findIndex(item => item.id_prod == pid) //Busco si existe en el carrito
+                const indice = cart.products.findIndex(item => item.id_prod == pid) 
                 if (indice != -1) {
-                    cart.products[indice].quantity = quantity //Si existe en el carrito modifico la cantidad
+                    cart.products[indice].quantity = quantity 
                 } else {
-                    cart.products.push({ id_prod: pid, quantity: quantity }) //Si no existe, lo agrego al carrito
+                    cart.products.push({ id_prod: pid, quantity: quantity }) 
                 }
-                const respuesta = await cartModel.findByIdAndUpdate(cid, cart) //Actualizar el carrito
+                const respuesta = await cartModel.findByIdAndUpdate(cid, cart) 
                 res.status(200).send({ respuesta: 'OK', mensaje: respuesta })
             } else {
                 res.status(404).send({ respuesta: 'Error en agregar producto Carrito', mensaje: 'Produt Not Found' })
@@ -60,11 +60,11 @@ cartRouter.post('/:cid/products/:pid', async (req, res) => {
 })
 
 
-cartRouter.delete('/:cid/products/:pid', async (req, res) => {
+cartRouter.delete('/api/carts/:cid/products/:pid', async (req, res) => {
     try {
         const { cid, pid } = req.params
         const cart = await cartModel.findById(cid)
-        //const prod = await productModel.findById(pid)
+        
 
         if(cart){
             if(cart.products.length != products.length){
@@ -87,7 +87,7 @@ cartRouter.delete('/:cid/products/:pid', async (req, res) => {
     }
 })
 
-cartRouter.delete('/:cid/', async (req, res) => {
+cartRouter.delete('/api/carts/:cid', async (req, res) => {
     try {
         const { cid, pid } = req.params
         const cart = await cartModel.findById(cid)
@@ -111,7 +111,7 @@ cartRouter.delete('/:cid/', async (req, res) => {
     }
 })
 
-cartRouter.put('/:cid', async (req, res) => {
+cartRouter.put('/api/carts/:cid', async (req, res) => {
     const { cid} = req.params
     const { products } = req.body
 
@@ -131,7 +131,7 @@ cartRouter.put('/:cid', async (req, res) => {
     }
 })
 
-cartRouter.put('/:cid/products/:pid', async (req, res) => {
+cartRouter.put('/api/carts/:cid/products/:pid', async (req, res) => {
     const { cid, pid } = req.params
     const { cantidad } = req.body
 
@@ -139,7 +139,7 @@ cartRouter.put('/:cid/products/:pid', async (req, res) => {
         const cart = await cartModel.findById(cid)
         if (cart) {
             
-             // Verifica si 'cantidad' es un número entero positivo mayor a cero
+             
             if (!Number.isInteger(cantidad) || cantidad < 0) {
                 res.status(400).send("La cantidad ingresada debe ser un entero mayor a cero.");
             }

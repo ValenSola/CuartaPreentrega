@@ -11,7 +11,7 @@ const messagesSchema = new Schema({
     },
     postTime: {
         type: Date,
-        default: Date.now //Devolve la fecha actual
+        default: Date.now 
     }
 })
 

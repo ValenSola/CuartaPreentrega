@@ -23,5 +23,5 @@ const userSchema = new Schema({
         required: true
     }
 })
-//Parametro 1:Nombre coleccion - Parametro 2: Schema 
+
 export const userModel = model('users', userSchema)
