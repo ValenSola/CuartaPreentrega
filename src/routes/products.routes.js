@@ -102,4 +102,4 @@ productRouter.delete('/api/products/:pid', async (req, res) => {
 })
 
 
-export default productRouter
+module.exports = productRouter;

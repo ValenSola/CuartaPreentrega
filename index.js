@@ -1,14 +1,14 @@
 import express from 'express';
 import { engine } from 'express-handlebars';;
 import path from 'path';
-import { __dirname } from './path.js';
-import ManagerProducts from './models/ManagerProducts.js';
-import productsRoutes from './routes/products.routes.js';
-import cartsRoutes from './routes/carts.routes.js';
+import { __dirname } from './src/path.js';
+import ManagerProducts from './src/models/ManagerProducts.js';
+import productsRoutes from './src/routes/products.routes.js';
+import cartsRoutes from './src/routes/carts.routes.js';
 import {Server} from 'socket.io';
 import mongoose from 'mongoose';
-import { productModel } from './models/products.models.js'
-import { cartModel } from './models/carts.models.js'
+import { productModel } from './src/models/products.models.js'
+import { cartModel } from './src/models/carts.models.js'
 
 mongoose.connect('mongodb+srv://christianjavierbergero:kPX5vgj9ewJ7sN59@cluster0.vb2rx0e.mongodb.net/?retryWrites=true&w=majority')
     .then(async () => {
@@ -23,17 +23,17 @@ mongoose.connect('mongodb+srv://christianjavierbergero:kPX5vgj9ewJ7sN59@cluster0
 
 const app = express();
 
-app.use(express.json()); // Convertir lo que está en el body que son string JSon , en objetos javascript
-app.use(express.urlencoded({extended:true})) //Para manejar URL extensas
+app.use(express.json()); 
+app.use(express.urlencoded({extended:true})) 
 app.use('/api/products', productsRoutes)
 app.use('/api/carts', cartsRoutes)
 
 
 
-//Configuración carpeta estática
+
 app.use('/', express.static(path.join(__dirname, '/public')))
 
-//configuración handlebars
+
 app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
 app.set('views', path.resolve(__dirname, './views'))
@@ -43,20 +43,20 @@ const PORT = 4000;
 
 const server = app.listen(PORT, () => {console.log(`Server on PORT ${PORT} : http://localhost:4000/`)});
 
-//Usuamos socket.io
+
 
 const io = new Server(server);
 
-app.get('/', async (req, res) => {
+app.get('/api/products', async (req, res) => {
     try {
         const manager = new ManagerProducts();
-        //const data = await manager.getProducts();
+        
         const data = await manager.getProducts();
         res.render('home', {
             data,
             css: 'style.css',
             tittle: 'Products'
-        }); // Renderiza la página HTML y pasa los datos como contexto
+        }); 
     } catch (error) {
         console.error(error);
         res.status(500).send('Error interno del servidor');
@@ -71,13 +71,13 @@ app.get('/', async (req, res) => {
 app.get('/realtimehandlebars', async (req, res) => {
     try {
         const manager = new ManagerProducts();
-        //const data = await manager.getProducts();
+        
         const data = await manager.getProducts();
         res.render('realTimeProducts', {
             data,
             css: 'style.css',
             tittle: 'Products'
-        }); // Renderiza la página HTML y pasa los datos como contexto
+        }); 
     } catch (error) {
         console.error(error);
         res.status(500).send('Error interno del servidor');
