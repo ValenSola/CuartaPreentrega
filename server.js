@@ -1,9 +1,13 @@
-
+import { cartsRoutes } from "./src/routes/carts.routes";
+import { productsRoutes } from "./src/routes/products.routes";
 const express = require('express');
 const {engine} = require('express-handlebars');
 const Contenedor = require('./src/contenedor')
 const contenedor = new Contenedor("products.json");
 const app = express();
+
+app.use("/api/products", productsRoutes);
+app.use("/api/carts", cartsRoutes);
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -16,26 +20,27 @@ app.engine('hbs', engine({
     extname: '.hbs',
     defaultLayout: 'index.hbs',
     layoutsDir: __dirname + '/views/layouts',
-    partialsDir: __dirname + '/views/partials'
+    partialsDir: __dirname + '/views/partials',
+    pagesDir: __dirname + '/views/pages'
 }))
 
-app.get('/productos', async(req, res) => {
+app.get('/api/products', async(req, res) => {
     const productos = await contenedor.getAll();
     res.render('pages/list', {productos})
 })
 
-app.post('/productos', async(req,res) => {
+app.post('/api/products', async(req,res) => {
     const {body} = req;
     await contenedor.save(body);
     res.redirect('/');
 })
 
-app.get('/', (req,res) => {
+app.get('/api/products', (req,res) => {
     res.render('pages/form', {})
 })
 
 
-const PORT = 1242;
+const PORT = 8080;
 const server = app.listen(PORT, () => {
 console.log(` >>>>> 🚀 Server started at http://localhost:${PORT}`)
 })
