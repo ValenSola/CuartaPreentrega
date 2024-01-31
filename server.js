@@ -1,5 +1,6 @@
-import productRouter from './src/routes/products.routes.js';
-import cartRouter from './src/routes/carts.routes.js';
+
+import {productRouter} from './src/routes/products.routes.js';
+import {cartRouter} from './src/routes/carts.routes.js';
 import express from 'express';
 import {engine} from 'express-handlebars';
 import Contenedor from './src/contenedor.js';
@@ -19,9 +20,9 @@ app.set('view engine', 'hbs');
 app.engine('hbs', engine({
     extname: '.hbs',
     defaultLayout: 'index.hbs',
-    layoutsDir: __dirname + '/views/layouts',
-    partialsDir: __dirname + '/views/partials',
-    pagesDir: __dirname + '/views/pages'
+    layoutsDir: __dirname + './src/views/layouts',
+    partialsDir: __dirname + './src/views/partials',
+    pagesDir: __dirname + './src/views/pages'
 }))
 
 app.get('/api/products', async(req, res) => {
