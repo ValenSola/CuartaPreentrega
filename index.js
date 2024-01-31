@@ -3,8 +3,8 @@ import { engine } from 'express-handlebars';;
 import path from 'path';
 import { __dirname } from './src/path.js';
 import ManagerProducts from './src/models/ManagerProducts.js';
-import productsRoutes from './src/routes/products.routes.js';
-import cartsRoutes from './src/routes/carts.routes.js';
+import productRouter from './src/routes/products.routes.js';
+import cartRouter from './src/routes/carts.routes.js';
 import {Server} from 'socket.io';
 import mongoose from 'mongoose';
 import { productModel } from './src/models/products.models.js'
@@ -25,8 +25,8 @@ const app = express();
 
 app.use(express.json()); 
 app.use(express.urlencoded({extended:true})) 
-app.use('/api/products', productsRoutes)
-app.use('/api/carts', cartsRoutes)
+app.use('/api/products', productRouter)
+app.use('/api/carts', cartRouter)
 
 
 
@@ -39,9 +39,9 @@ app.set('view engine', 'handlebars')
 app.set('views', path.resolve(__dirname, './views'))
 
 
-const PORT = 4000;
+const PORT = 8080;
 
-const server = app.listen(PORT, () => {console.log(`Server on PORT ${PORT} : http://localhost:4000/`)});
+const server = app.listen(PORT, () => {console.log(`Server on PORT ${PORT} : http://localhost:8080/`)});
 
 
 

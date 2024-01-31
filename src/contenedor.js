@@ -1,4 +1,4 @@
-import { fs } from "fs";
+import  fs  from "fs";
 
 class Contenedor {
   constructor(fileName) {
@@ -130,4 +130,4 @@ class Contenedor {
   }
 }
 
-module.exports = Contenedor;
+export default Contenedor;

@@ -163,4 +163,4 @@ cartRouter.put('/api/carts/:cid/products/:pid', async (req, res) => {
 })
 
 
-module.exports = cartRouter;
+export default cartRouter;

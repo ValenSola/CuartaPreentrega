@@ -1,13 +1,13 @@
-import productsRoutes from './src/routes/products.routes.js';
-import cartsRoutes from './src/routes/carts.routes.js';
-const express = require('express');
-const {engine} = require('express-handlebars');
-const Contenedor = require('./src/contenedor')
+import productRouter from './src/routes/products.routes.js';
+import cartRouter from './src/routes/carts.routes.js';
+import express from 'express';
+import {engine} from 'express-handlebars';
+import Contenedor from './src/contenedor.js';
 const contenedor = new Contenedor("products.json");
 const app = express();
 
-app.use("/api/products", productsRoutes);
-app.use("/api/carts", cartsRoutes);
+app.use("/api/products", productRouter);
+app.use("/api/carts", cartRouter);
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
