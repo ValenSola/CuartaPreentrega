@@ -1,13 +1,10 @@
-
+import productsRoutes from './src/routes/products.routes.js';
+import cartsRoutes from './src/routes/carts.routes.js';
 const express = require('express');
 const {engine} = require('express-handlebars');
 const Contenedor = require('./src/contenedor')
 const contenedor = new Contenedor("products.json");
 const app = express();
-
-var cartsRoutes = require('./src/routes/carts.routes.js');
-var productsRoutes = require('./src/routes/products.routes.js');
-
 
 app.use("/api/products", productsRoutes);
 app.use("/api/carts", cartsRoutes);
