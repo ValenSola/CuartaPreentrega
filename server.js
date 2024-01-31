@@ -1,6 +1,7 @@
 
-import {productRouter} from './src/routes/products.routes.js';
-import {cartRouter} from './src/routes/carts.routes.js';
+import productRouter from './src/routes/products.routes.js';
+import cartRouter from './src/routes/carts.routes.js';
+import { __dirname } from './src/path.js';
 import express from 'express';
 import {engine} from 'express-handlebars';
 import Contenedor from './src/contenedor.js';
