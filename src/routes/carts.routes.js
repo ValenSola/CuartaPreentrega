@@ -4,7 +4,7 @@ import { productModel } from "../models/products.models.js";
 
 const cartRouter = Router()
 
-cartRouter.get('/api/carts/:cid', async (req, res) => {
+cartRouter.get('/api/:cid', async (req, res) => {
     const { id } = req.params
 
     try {
@@ -18,7 +18,7 @@ cartRouter.get('/api/carts/:cid', async (req, res) => {
     }
 })
 
-cartRouter.post('/api/carts', async (req, res) => {
+cartRouter.post('', async (req, res) => {
 
     try {
         const cart = await cartModel.create({})
@@ -28,7 +28,7 @@ cartRouter.post('/api/carts', async (req, res) => {
     }
 })
 
-cartRouter.post('/api/carts/:cid/products/:pid', async (req, res) => {
+cartRouter.post('/api/:cid/products/:pid', async (req, res) => {
     const { cid, pid } = req.params
     const { quantity } = req.body
 
@@ -60,7 +60,7 @@ cartRouter.post('/api/carts/:cid/products/:pid', async (req, res) => {
 })
 
 
-cartRouter.delete('/api/carts/:cid/products/:pid', async (req, res) => {
+cartRouter.delete('/api/:cid/products/:pid', async (req, res) => {
     try {
         const { cid, pid } = req.params
         const cart = await cartModel.findById(cid)
@@ -87,7 +87,7 @@ cartRouter.delete('/api/carts/:cid/products/:pid', async (req, res) => {
     }
 })
 
-cartRouter.delete('/api/carts/:cid', async (req, res) => {
+cartRouter.delete('/api/:cid', async (req, res) => {
     try {
         const { cid, pid } = req.params
         const cart = await cartModel.findById(cid)
@@ -111,7 +111,7 @@ cartRouter.delete('/api/carts/:cid', async (req, res) => {
     }
 })
 
-cartRouter.put('/api/carts/:cid', async (req, res) => {
+cartRouter.put('/api/:cid', async (req, res) => {
     const { cid} = req.params
     const { products } = req.body
 
@@ -131,7 +131,7 @@ cartRouter.put('/api/carts/:cid', async (req, res) => {
     }
 })
 
-cartRouter.put('/api/carts/:cid/products/:pid', async (req, res) => {
+cartRouter.put('/api/:cid/products/:pid', async (req, res) => {
     const { cid, pid } = req.params
     const { cantidad } = req.body
 

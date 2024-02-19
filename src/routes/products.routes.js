@@ -3,7 +3,7 @@ import { productModel } from "../models/products.models.js";
 
 const productRouter = Router()
 
-productRouter.get('/api/products', async (req, res) => {
+productRouter.get('/', async (req, res) => {
     
     const { limit } = req.query;
     const limitProd = limit ?? 10;
@@ -48,7 +48,7 @@ productRouter.get('/api/products', async (req, res) => {
     }
 })
 
-productRouter.get('/api/products/:pid', async (req, res) => {
+productRouter.get('/:pid', async (req, res) => {
     const { id } = req.params
 
     try {
@@ -62,7 +62,7 @@ productRouter.get('/api/products/:pid', async (req, res) => {
     }
 })
 
-productRouter.post('/api/products', async (req, res) => {
+productRouter.post('/', async (req, res) => {
     const { title, description, stock, code, price, category } = req.body
     try {
         const prod = await productModel.create({ title, description, stock, code, price, category })
@@ -72,7 +72,7 @@ productRouter.post('/api/products', async (req, res) => {
     }
 })
 
-productRouter.put('/api/products/:pid', async (req, res) => {
+productRouter.put('/:pid', async (req, res) => {
     const { id } = req.params
     const { title, description, stock, status, code, price, category } = req.body
 
@@ -87,7 +87,7 @@ productRouter.put('/api/products/:pid', async (req, res) => {
     }
 })
 
-productRouter.delete('/api/products/:pid', async (req, res) => {
+productRouter.delete('/:pid', async (req, res) => {
     const { id } = req.params
 
     try {
